@@ -1,0 +1,103 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background: #e9ecf4;
+    color: #000;
+}
+
+.contenedor{
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+/* A partir de aquí el GRID */
+
+.contenedor{
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, auto);
+    /*Vamos a diseñar con areas en vez de MediaQuery*/
+    grid-template-areas: "header header header"
+                "contenido contenido sidebar"
+                "widget-1  widget-2  sidebar"
+                "footer    footer    footer"; 
+    /*de esta forma el header va a abarcar 3 columnas en 1a linea
+    la segunda línea dos columnas para el contenido y sidebar la 3a
+    la 3a línea la ocupan dos widgets y la sidebar;
+    y la cuarta fila entera el footer*/
+}
+
+.contenedor > div,
+.contenedor .header,
+.contenedor .contenido,
+.contenedor .sidebar,
+.contenedor .footer {
+    background: #fff;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.contenedor .header{
+    background: #12203e;
+    color: #fff;
+    grid-area: header; /*nombre creado en la clase contenedor*/
+}
+
+.contenedor .contenido{
+    grid-area: contenido; /*nombre creado en la clase contenedor*/
+}
+
+.contenedor .sidebar{
+    grid-column: 3 / 4;
+    background: #faa43d;
+    text-align: center;
+    display: flex; /*utilizamos flexbox para centrar el contenido*/
+    align-items: center;/*alineamos verticlamente*/
+    justify-content: center;/*alineamos horizontalmente*/
+    min-height: 100px; /* para que la altura mínima sean 100 px cuando mediante responsive design, esta barra se desplace abajo*/
+    grid-area: sidebar; /*nombre creado en la clase contenedor*/
+
+}
+
+.contenedor .widget-1,
+.contenedor .widget-2{
+    background: #55a8fd;
+    color: #fff;
+    height: 100px;
+    text-align: center;
+    display: flex; /*utilizamos flexbox para centrar el contenido*/
+    align-items: center;/*alineamos verticlamente*/
+    justify-content: center;/*alineamos horizontalmente*/
+}
+
+.contenedor .widget-1{
+    grid-area: widget-1; /*nombre creado en la clase contenedor*/
+}
+
+.contenedor .widget-2{
+    grid-area: widget-2; /*nombre creado en la clase contenedor*/
+}
+
+.contenedor .footer{
+    background: #12203e;
+    color: #fff;
+    grid-area: footer; /*nombre creado en la clase contenedor*/    
+}
+
+@media screen and (max-width: 768px){
+    body{
+        background: #000; /*cuando baje de 768 px el fondo será negro*/
+    }
+    .contenedor {
+        grid-template-areas: "header header header"
+                "contenido contenido contenido"
+                "sidebar    sidebar   sidebar"
+                "widget-1   widget-1  widget-2"
+                "footer    footer    footer"; 
+    }
+}
